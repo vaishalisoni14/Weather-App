@@ -1,5 +1,4 @@
 Weather App
-
 Overview
 The Weather App is a simple, user-friendly application that allows users to get current weather information for any city. The app fetches weather data from a public API and displays it with a visually appealing interface.
 
@@ -8,6 +7,7 @@ Search for current weather by city name.
 Display weather information including temperature, weather description, humidity, and wind speed.
 Responsive design using Bootstrap for a seamless experience on both desktop and mobile devices.
 Autocomplete city suggestions.
+
 Technologies Used
 HTML5
 CSS3
@@ -30,6 +30,7 @@ weather-app/
 ├── README.md
 └── assets/
     └── (any additional images or icons)
+    
 HTML Structure
 index.html: The main HTML file that includes the structure of the web page and links to the CSS and JavaScript files.
 CSS Styling
@@ -40,7 +41,6 @@ API Integration
 This app uses the OpenWeatherMap API to fetch current weather data. You need to sign up at OpenWeatherMap to get an API key.
 
 In script.js, replace YOUR_API_KEY with your actual API key:
-
 javascript
 Copy code
 const apiKey = 'YOUR_API_KEY';
