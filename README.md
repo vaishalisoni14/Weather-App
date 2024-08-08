@@ -29,7 +29,6 @@ weather-app/
 ├── script.js
 ├── README.md
 └── assets/
-└── (any additional images or icons)
 
 - **index.html**: The main HTML file that includes the structure of the web page and links to the CSS and JavaScript files.
 - **style.css**: Custom styles for the application, enhancing the visual design and ensuring a responsive layout.
