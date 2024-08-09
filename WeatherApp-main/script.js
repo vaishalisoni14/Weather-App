@@ -1,10 +1,11 @@
-const apiKey = "20da423906ccf27bec8c2d81c8f4a2eb"
+const weatherDataEle = document.querySelector(".weather-data");
+const cityNameEle = document.querySelector("#city-name");
+const formEle = document.querySelector("form");
+const imgIcon = document.querySelector(".icon");
+const citySuggestions = document.getElementById('city-suggestions');
+const container = document.querySelector('.container');
 
-const weatherDataEle = document.querySelector(".weather-data")
-const cityNameEle = document.querySelector("#city-name")
-const formEle = document.querySelector("form")
-const imgIcon = document.querySelector(".icon")
-const citySuggestions = document.getElementById('city-suggestions')
+const apiKey = "20da423906ccf27bec8c2d81c8f4a2eb";
 
 const cities = [
     'Mumbai', 'Delhi', 'Bengaluru', 'Hyderabad', 'Ahmedabad', 'Chennai', 'Kolkata',
@@ -26,6 +27,7 @@ const cities = [
     'Gopalpur', 'Agartala', 'Bhagalpur', 'Muzaffarnagar', 'Bhatpara', 'Panipat',
     'Latur', 'Dhule', 'Rohtak', 'Korba', 'Bhilwara', 'Brahmapur', 'Muzaffarpur'
 ];
+  
 
 document.addEventListener('DOMContentLoaded', () => {
     cityNameEle.addEventListener('input', () => {
@@ -58,6 +60,7 @@ async function getWeatherData(cityValue) {
         const temprature = Math.floor(data.main.temp);
         const description = data.weather[0].description;
         const icon = data.weather[0].icon;
+        const mainWeather = data.weather[0].main.toLowerCase();
 
         const details = [
             `Feels Like: ${Math.floor(data.main.feels_like)}°C`,
@@ -68,15 +71,48 @@ async function getWeatherData(cityValue) {
         weatherDataEle.querySelector(".temp").textContent = `${temprature}°C`;
         weatherDataEle.querySelector(".desc").textContent = `${description}`;
 
-        imgIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}.png" alt="">`;
+        imgIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon">`;
 
         weatherDataEle.querySelector(".details").innerHTML = details.map((detail) => {
             return `<div>${detail}</div>`;
         }).join("");
+
+        // Set the background image based on the weather condition
+        setWeatherImage(mainWeather);
 
     } catch (err) {
         weatherDataEle.querySelector(".temp").textContent = "";
         imgIcon.innerHTML = "";
         weatherDataEle.querySelector(".desc").textContent = "An Error Occurred!";
     }
+}
+
+function setWeatherImage(weather) {
+    let imageUrl = '';
+
+    switch (weather) {
+        case 'clear':
+            imageUrl = 'images/sunny.jpg';
+            break;
+        case 'clouds':
+            imageUrl = 'images/cloudy.jpeg';
+            break;
+        case 'rain':
+       
+            imageUrl = 'images/rainy.jpeg';
+            break;
+        case 'snow':
+            imageUrl = 'images/snowy.png';
+            break;
+        case 'thunderstorm':
+            imageUrl = 'images/stormy.jpeg';
+            break;
+        default:
+            imageUrl = 'images/default.jpeg';
+            break;
+    }
+
+    container.style.backgroundImage = `url(${imageUrl})`;
+    container.style.backgroundSize = 'cover';
+    container.style.backgroundPosition = 'center';
 }
